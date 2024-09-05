@@ -1,0 +1,58 @@
+<h1 class="my-4 text-center">Créer un nouvel étudiant</h1>
+
+<div class="container">
+  <%= form_with model: @etudiant, local: true, html: { class: 'needs-validation', novalidate: true } do |form| %>
+    <div class="row">
+      <div class="col-md-6 mb-3">
+        <%= form.label :nom, class: 'form-label' %>
+        <%= form.text_field :nom, class: 'form-control', placeholder: 'Entrez le nom', required: true %>
+        <div class="invalid-feedback">
+          Le nom est requis.
+        </div>
+      </div>
+
+      <div class="col-md-6 mb-3">
+        <%= form.label :prenom, class: 'form-label' %>
+        <%= form.text_field :prenom, class: 'form-control', placeholder: 'Entrez le prénom', required: true %>
+        <div class="invalid-feedback">
+          Le prénom est requis.
+        </div>
+      </div>
+    </div>
+
+    <div class="mb-3">
+      <%= form.label :email, class: 'form-label' %>
+      <%= form.email_field :email, class: 'form-control', placeholder: 'Entrez l\'email', required: true %>
+      <div class="invalid-feedback">
+        L'email est requis et doit être valide.
+      </div>
+    </div>
+
+    <div class="mb-3">
+      <%= form.label :date_naissance, class: 'form-label' %>
+      <%= form.date_select :date_naissance, { start_year: 1950, end_year: Time.now.year }, { class: 'form-control' } %>
+    </div>
+
+    <div class="mb-3 text-center">
+      <%= form.submit 'Créer étudiant', class: 'btn btn-primary' %>
+    </div>
+  <% end %>
+</div>
+
+<script>
+  // JavaScript pour la validation Bootstrap
+  (function () {
+    'use strict'
+    var forms = document.querySelectorAll('.needs-validation')
+    Array.prototype.slice.call(forms)
+      .forEach(function (form) {
+        form.addEventListener('submit', function (event) {
+          if (!form.checkValidity()) {
+            event.preventDefault()
+            event.stopPropagation()
+          }
+          form.classList.add('was-validated')
+        }, false)
+      })
+  })()
+</script>
